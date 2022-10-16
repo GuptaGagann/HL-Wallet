@@ -1,0 +1,43 @@
+<div>
+    <div class="alert alert-primary" *ngIf="!isWalletSetup">Setup wallet to enable transaction.</div>
+    <div class="button-controls">
+        <button class="btn btn-primary" [disabled]="!isWalletSetup"
+            (click)="toggleAddTransactionView()">{{showAddTransaction ?
+            "Collapse Transaction Form " : "New
+            Transaction "}}</button>
+        <button class="btn btn-primary toggle-transaction" (click)="toggleTransactionsView()">{{(showTransactions ?
+            "Hide " : "Show ") + "Transactions"}}</button>
+    </div>
+    <form *ngIf="showAddTransaction" class="add-form" [formGroup]="addForm" (submit)="addTransaction()">
+        <div class="col-md-2 form-group radio-group">
+            <label for="type">Type:<span class="text-danger">*</span></label>
+            <input type="radio" value="CREDIT" formControlName="type" id="credit"> Credit
+            <input type="radio" value="DEBIT" formControlName="type" id="debit"> Debit
+        </div>
+        <div class="col-md-2 offset-md-1  form-group">
+            <label for="amount">Amount<span class="text-danger">*</span></label>
+            <input class="form-control" type="number" formControlName="amount" id="amount">
+        </div>
+        <div class="col-md-2 offset-md-1  form-group">
+            <label for="description">Description</label>
+            <input class="form-control" type="text" formControlName="description" id="description">
+        </div>
+        <button class="col-md-3 offset-md-1 btn btn-primary add-button" type="submit"
+            [disabled]="!addForm.controls['amount'].value">
+            Add Transaction
+        </button>
+    </form>
+    <div class="alert alert-danger"
+        *ngIf="showAddTransaction && (addForm.controls['amount'].dirty && addForm.controls['amount'].errors)">
+        <div *ngIf="addForm.controls['amount'].errors?.['required']">Amount field is required!</div>
+    </div>
+    <div *ngIf="transactionStatusMessage!='' && showAddTransaction"
+        [class]="transactionStatus ? ('alert alert-success') : ('alert alert-danger')">{{addForm.value.amount | currency
+        : "INR" : "symbol"}}{{transactionStatusMessage}}
+    </div>
+    <br>
+    <div *ngIf="showTransactions">
+        <div class="alert alert-danger" *ngIf="noTransactionsMessage!=''">{{noTransactionsMessage}}</div>
+        <app-transactions [transactions]="transactions"></app-transactions>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="transactions">
+    <h4>Transactions</h4>
+    <div class="table-responsive transactions-table">
+        <table class="table table-bordered table-hover">
+            <thead class="thead thead-dark">
+                <tr class="column-names">
+                    <th>Select</th>
+                    <th>Serial No.</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>Balance</th>
+                    <th>Wallet ID</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="row-entries" *ngFor="let transaction of transactions; let rowIndex=index;"
+                    (click)="toggleRowSelection(rowIndex)" [class.selected]="rowIndex == selectedIndex">
+                    <td><input type="radio" [checked]="rowIndex == selectedIndex"></td>
+                    <td>{{rowIndex+1}}</td>
+                    <td>{{transaction.createdAt.substring(0,10)}}</td>
+                    <td>{{transaction.type}}</td>
+                    <td>{{transaction.amount | currency : "INR" : "symbol"}}</td>
+                    <td>{{transaction.balance | currency : "INR" : "symbol"}}</td>
+                    <td>{{transaction.walletId}}</td>
+                    <td>{{transaction.description}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

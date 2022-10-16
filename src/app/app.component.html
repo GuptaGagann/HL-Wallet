@@ -7,8 +7,14 @@
         HighLevel Wallet
       </a>
       <div *ngIf="walletDetails != undefined" class="wallet-details">
-        <p>Welcome, <span class="bold-span">{{ walletDetails.name }}</span> !</p>&nbsp;&nbsp;&nbsp;&nbsp;
-        <p>Current Balance: <span class="bold-span">{{ walletDetails.balance | currency : "INR" : "symbol" }}</span></p>
+        <div>Welcome, <span class="bold-span">{{ walletDetails.name }}</span> !</div>
+        <div>Current Balance: <span class="bold-span">{{ walletDetails.balance | currency : "INR" : "symbol" }}</span>
+        </div>
+        <button class="btn" (click)="logout()">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/OOjs_UI_icon_logOut-ltr.svg/800px-OOjs_UI_icon_logOut-ltr.svg.png?20180609204934"
+            alt="Logout button icon" class="img-responsive" width="30">
+        </button>
       </div>
     </nav>
   </header>
@@ -31,13 +37,16 @@
   </form>
   <div class="alert alert-danger"
     *ngIf="(setupForm.controls['name'].dirty && setupForm.controls['name'].errors) || (setupForm.controls['balance'].dirty && setupForm.controls['balance'].errors)">
-    <p *ngIf="setupForm.controls['name'].errors?.['required'] && setupForm.controls['balance'].errors?.['required']">
-      Name and Initial Balance fields are required!</p>
-    <p *ngIf="setupForm.controls['name'].dirty && setupForm.controls['name'].errors?.['required'] && !setupForm.controls['balance'].errors?.['required']">
-      Name field is required!</p>
-    <p *ngIf="!setupForm.controls['name'].errors?.['required'] && setupForm.controls['balance'].dirty && setupForm.controls['balance'].errors?.['required']">
-      Initial Balance field is required!</p>
+    <div *ngIf="setupForm.controls['name'].errors?.['required'] && setupForm.controls['balance'].errors?.['required']">
+      Name and Initial Balance fields are required!</div>
+    <div
+      *ngIf="setupForm.controls['name'].dirty && setupForm.controls['name'].errors?.['required'] && !setupForm.controls['balance'].errors?.['required']">
+      Name field is required!</div>
+    <div
+      *ngIf="!setupForm.controls['name'].errors?.['required'] && setupForm.controls['balance'].dirty && setupForm.controls['balance'].errors?.['required']">
+      Initial Balance field is required!</div>
   </div>
   <div *ngIf="setupMessage!=''" [class]="setupStatus ? ('alert alert-success') : ('alert alert-danger')">
     {{setupMessage}}</div>
 </div>
+<app-home #home [isWalletSetup]="setupStatus" (refreshBalance)="getWalletDetails()"></app-home>

@@ -5,7 +5,7 @@ import { WalletService } from './wallet.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'HL-Wallet-UI';
@@ -42,6 +42,9 @@ export class AppComponent {
         this.setupStatus = true;
         this.setupMessage =
           'Setup successful for Wallet ID: ' + value.data.walletSetup.id;
+        setTimeout(() => {
+          this.resetSetupForm();
+        }, 4000);
       },
       error: (err) => {
         console.log(err);
@@ -66,5 +69,12 @@ export class AppComponent {
           },
         });
     }
+  }
+
+  public logout() {
+    localStorage.removeItem('walletId');
+    this.walletDetails = null;
+    this.setupMessage = '';
+    this.setupStatus = false;
   }
 }

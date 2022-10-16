@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WalletService {
   private baseUrl = environment.apiUrl;
@@ -18,5 +18,22 @@ export class WalletService {
 
   public getWalletDetails(walletId: number): Observable<any> {
     return this.http.get<any>(this.baseUrl + `walletDetails/${walletId}`);
+  }
+
+  public addTransaction(walletId: number, transaction: any): Observable<any> {
+    return this.http.put<any>(
+      this.baseUrl + `/transact/${walletId}`,
+      transaction
+    );
+  }
+
+  public getTransactions(): Observable<any> {
+    return this.http.get<any>(this.baseUrl + `transactions`);
+  }
+
+  public getTransactionsByWalletId(walletId: number): Observable<any> {
+    return this.http.get<any>(
+      this.baseUrl + `transactions?walletId=${walletId}`
+    );
   }
 }
