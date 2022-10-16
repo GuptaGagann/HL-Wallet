@@ -27,13 +27,13 @@ export class WalletService {
     );
   }
 
-  public getTransactions(): Observable<any> {
-    return this.http.get<any>(this.baseUrl + `transactions`);
+  public getTransactions(skip: number = 0, limit: number = 10): Observable<any> {
+    return this.http.get<any>(this.baseUrl + `transactions?skip=${skip}&limit=${limit}`);
   }
 
-  public getTransactionsByWalletId(walletId: number): Observable<any> {
+  public getTransactionsByWalletId(walletId: number, skip: number = 0, limit: number = 10): Observable<any> {
     return this.http.get<any>(
-      this.baseUrl + `transactions?walletId=${walletId}`
+      this.baseUrl + `transactions?walletId=${walletId}&skip=${skip}&limit=${limit}`
     );
   }
 }

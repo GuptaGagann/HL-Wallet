@@ -23,7 +23,7 @@
             <input class="form-control" type="text" formControlName="description" id="description">
         </div>
         <button class="col-md-3 offset-md-1 btn btn-primary add-button" type="submit"
-            [disabled]="!addForm.controls['amount'].value">
+            [disabled]="!addForm.controls['amount'].value || !nextTransactionEnabled">
             Add Transaction
         </button>
     </form>
@@ -38,6 +38,19 @@
     <br>
     <div *ngIf="showTransactions">
         <div class="alert alert-danger" *ngIf="noTransactionsMessage!=''">{{noTransactionsMessage}}</div>
-        <app-transactions [transactions]="transactions"></app-transactions>
+        <app-transactions [transactions]="transactions" [selectedTabIndex]="selectedTabIndex"></app-transactions>
+        <div class="table-responsive pagination-table">
+            <table class="table table-bordered">
+                <thead class="thead thead-dark">
+                    <tr class="tabs">
+                        <th *ngFor="let i of tabs; let tabIndex=index;">
+                            <p class="tab"><button
+                                    [class]="'btn '+(tabIndex == selectedTabIndex ? 'btn-success' : 'btn-primary')"
+                                    (click)="updateTabIndex(tabIndex)">{{i}}</button></p>
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
     </div>
 </div>

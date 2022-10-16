@@ -38,3 +38,23 @@ input[type="number"]::-webkit-outer-spin-button {
 .alert {
   margin: 30px;
 }
+.pagination-table {
+  margin: 30px;
+  table {
+    thead {
+      tr {
+        th {
+          background-color: lightgrey;
+          text-align: center;
+          p {
+            align-content: center;
+            margin: unset;
+            button {
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+  }
+}

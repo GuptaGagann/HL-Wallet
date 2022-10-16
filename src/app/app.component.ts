@@ -61,6 +61,10 @@ export class AppComponent {
           next: (value) => {
             console.log(value);
             this.walletDetails = value.data.walletEntry;
+            localStorage.setItem(
+              'walletBalance',
+              this.walletDetails.balance.toString()
+            );
             this.noWalletsMessage = '';
           },
           error: (err) => {
@@ -73,6 +77,7 @@ export class AppComponent {
 
   public logout() {
     localStorage.removeItem('walletId');
+    localStorage.removeItem('walletBalance');
     this.walletDetails = null;
     this.setupMessage = '';
     this.setupStatus = false;

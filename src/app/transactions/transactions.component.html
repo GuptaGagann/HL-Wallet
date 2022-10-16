@@ -1,6 +1,6 @@
 <div class="transactions">
     <h4>Transactions</h4>
-    <div class="table-responsive transactions-table">
+    <div class="table-responsive">
         <table class="table table-bordered table-hover">
             <thead class="thead thead-dark">
                 <tr class="column-names">
@@ -18,7 +18,7 @@
                 <tr class="row-entries" *ngFor="let transaction of transactions; let rowIndex=index;"
                     (click)="toggleRowSelection(rowIndex)" [class.selected]="rowIndex == selectedIndex">
                     <td><input type="radio" [checked]="rowIndex == selectedIndex"></td>
-                    <td>{{rowIndex+1}}</td>
+                    <td>{{(rowIndex + 1) + (10 * selectedTabIndex)}}</td>
                     <td>{{transaction.createdAt.substring(0,10)}}</td>
                     <td>{{transaction.type}}</td>
                     <td>{{transaction.amount | currency : "INR" : "symbol"}}</td>
