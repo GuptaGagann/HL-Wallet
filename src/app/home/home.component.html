@@ -46,7 +46,7 @@
                         <th *ngFor="let i of tabs; let tabIndex=index;">
                             <p class="tab"><button
                                     [class]="'btn '+(tabIndex == selectedTabIndex ? 'btn-success' : 'btn-primary')"
-                                    (click)="updateTabIndex(tabIndex)">{{i}}</button></p>
+                                    (click)="updateTabIndex(tabIndex)">{{ tabIndex + 1 }}</button></p>
                         </th>
                     </tr>
                 </thead>

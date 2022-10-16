@@ -7,7 +7,6 @@ import {
   OnChanges,
 } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import * as _ from 'lodash';
 import { WalletService } from '../wallet.service';
 
 @Component({
@@ -33,7 +32,8 @@ export class HomeComponent implements OnInit, OnChanges {
 
   public ngOnInit() {
     console.log('setup status', this.isWalletSetup);
-    this.tabs = _.range(1, 11);
+    this.tabs = this.range(10);
+    console.log(this.tabs);
   }
 
   public ngOnChanges() {
@@ -165,11 +165,15 @@ export class HomeComponent implements OnInit, OnChanges {
 
   public updateTabIndex(tabIndex: number) {
     if (tabIndex == this.tabs.length - 1) {
-      this.tabs = _.range(1, this.tabs.length + 6);
+      this.tabs = this.range(this.tabs.length + 5);
     } else if (tabIndex <= this.tabs.length - 7 && this.tabs.length > 10) {
-      this.tabs = _.range(1, this.tabs.length - 4);
+      this.tabs = this.range(this.tabs.length - 5);
     }
     this.selectedTabIndex = tabIndex;
     this.getTransactions(tabIndex);
+  }
+
+  public range(n: number) {
+    return new Array(n);
   }
 }

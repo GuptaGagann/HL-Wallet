@@ -21,8 +21,8 @@ export class WalletService {
   }
 
   public addTransaction(walletId: number, transaction: any): Observable<any> {
-    return this.http.put<any>(
-      this.baseUrl + `/transact/${walletId}`,
+    return this.http.post<any>(
+      this.baseUrl + `transact/${walletId}`,
       transaction
     );
   }

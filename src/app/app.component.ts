@@ -44,7 +44,7 @@ export class AppComponent {
           'Setup successful for Wallet ID: ' + value.data.walletSetup.id;
         setTimeout(() => {
           this.resetSetupForm();
-        }, 4000);
+        }, 1500);
       },
       error: (err) => {
         console.log(err);
